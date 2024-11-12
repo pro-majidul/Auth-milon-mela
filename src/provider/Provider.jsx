@@ -8,22 +8,22 @@ export const AuthProvider = createContext(null)
 
 const Provider = ({ children }) => {
 
-    const [user , setUser] = useState(null)
+    const [user , setUser] = useState(null);
+    const [loading , setLoading] = useState(true)
     const createUser = (email , password) =>{
+        setLoading(true)
         return createUserWithEmailAndPassword(auth , email , password)
     }
 
     const loginUser = (email , password) =>{
+        setLoading(true)
       return  signInWithEmailAndPassword(auth , email , password)
     }
     const name = 'md majidul islam';
 
     const userLogOut = () =>{
-        signOut(auth)
-        .then(Result => {
-            setUser(Result);
-        })
-        .catch(error => console.log(error.message))
+       return signOut(auth)
+        
     }
 
     useEffect(()=>{
@@ -31,6 +31,7 @@ const Provider = ({ children }) => {
       const onObserve =  onAuthStateChanged(auth , currentUser=>{
         console.log(currentUser);
             setUser(currentUser)
+            setLoading(false)
             
         })
         return () =>{
@@ -45,7 +46,8 @@ const Provider = ({ children }) => {
         createUser,
         user,
         userLogOut,
-        loginUser
+        loginUser,
+        loading,
     }
     return (
         <AuthProvider.Provider value={AuthInfo}>
