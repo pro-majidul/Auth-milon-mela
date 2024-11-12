@@ -1,12 +1,21 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { auth } from '../firebase/Firebase.init';
+import { AuthProvider } from '../provider/Provider';
 
 const Login = () => {
-
+    const {loginUser} = useContext(AuthProvider)
     const handelLogin = e =>{
         e.preventDefault();
         const email = e.target.email.value;
         const password = e.target.password.value;
+        loginUser(email , password)
+        .then(result => {
+            console.log(result)
+        })
+        .catch(error =>{
+            console.log(error.message)
+        })
         console.log('login added ' , email , password);
     }
     return (
@@ -31,10 +40,10 @@ const Login = () => {
                             <input name='password' type="password" placeholder="password" className="input input-bordered" required />
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Register</button>
+                            <button className="btn btn-primary">Login</button>
                         </div>
                     </form>
-                    <p className='mx-4 my-2 text-lg'>Already have an account . please<Link to='/register'>Login </Link></p>
+                    <p className='mx-4 my-2 text-lg'>You are new this website  Please <Link to='/register'>Register</Link></p>
                 </div>
             </div>
         </div>

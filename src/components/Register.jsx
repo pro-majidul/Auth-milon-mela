@@ -48,10 +48,11 @@ const Register = () => {
                             </label>
                         </div>
                         <div className="form-control mt-6">
-                            <button className="btn btn-primary">Login</button>
+                            <button className="btn btn-primary">Register</button>
                         </div>
                     </form>
-                    <p className='mx-4 my-2 text-lg'>You are new this website  Please <Link to='/register'>Register</Link></p>
+                    <p className='mx-4 my-2 text-lg'>Already have an account . please<Link to='/login'> Login </Link></p>
+                   
                 </div>
             </div>
         </div>
