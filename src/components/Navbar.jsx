@@ -49,7 +49,8 @@ const Navbar = () => {
                         {Link}
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">daisyUI</a>
+                {/* <a className="btn btn-ghost text-xl">daisyUI</a> */}
+                <NavLink to='/' className='btn btn-ghost text-xl '> DaisyUI</NavLink>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="menu menu-horizontal gap-10 px-1">

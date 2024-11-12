@@ -1,9 +1,10 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../provider/Provider';
 
 const Register = () => {
-    const {createUser} = useContext(AuthProvider)
+    const {createUser} = useContext(AuthProvider);
+    const navigate = useNavigate()
     const handelRegister = e => {
         e.preventDefault();
         const name = e.target.name.value ;
@@ -12,7 +13,11 @@ const Register = () => {
         // console.log(name , email , password);
 
         createUser(email , password)
-        .then(result => console.log(result.user))
+        .then(result => {
+            e.target.reset();
+            navigate('/')
+
+        })
         .catch(error => console.log('error' , error.message))
 
     }

@@ -1,10 +1,11 @@
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { auth } from '../firebase/Firebase.init';
 import { AuthProvider } from '../provider/Provider';
 
 const Login = () => {
     const {loginUser} = useContext(AuthProvider)
+    const navigate = useNavigate()
     const handelLogin = e =>{
         e.preventDefault();
         const email = e.target.email.value;
@@ -12,6 +13,8 @@ const Login = () => {
         loginUser(email , password)
         .then(result => {
             console.log(result)
+            e.target.reset()
+            navigate('/')
         })
         .catch(error =>{
             console.log(error.message)
