@@ -3,22 +3,33 @@ import { Link, useNavigate } from 'react-router-dom';
 import { AuthProvider } from '../provider/Provider';
 
 const Register = () => {
-    const {createUser} = useContext(AuthProvider);
+    const { createUser,loginWithGoogle } = useContext(AuthProvider);
     const navigate = useNavigate()
+
+    const handelRegisteringoogle =()=>{
+        loginWithGoogle()
+        .then(result =>{
+            console.log(result.user)
+            navigate('/')
+        })
+        .catch(error =>{
+            console.log(error.message);
+        })
+    }
     const handelRegister = e => {
         e.preventDefault();
-        const name = e.target.name.value ;
+        const name = e.target.name.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
         // console.log(name , email , password);
 
-        createUser(email , password)
-        .then(result => {
-            e.target.reset();
-            navigate('/')
+        createUser(email, password)
+            .then(result => {
+                e.target.reset();
+                navigate('/')
 
-        })
-        .catch(error => console.log('error' , error.message))
+            })
+            .catch(error => console.log('error', error.message))
 
     }
 
@@ -56,8 +67,11 @@ const Register = () => {
                             <button className="btn btn-primary">Register</button>
                         </div>
                     </form>
+                    <div className='flex items-center justify-center'>
+                        <button onClick={handelRegisteringoogle} className="btn btn-primary">Continue with Google</button>
+                    </div>
                     <p className='mx-4 my-2 text-lg'>Already have an account . please<Link to='/login'> Login </Link></p>
-                   
+
                 </div>
             </div>
         </div>
